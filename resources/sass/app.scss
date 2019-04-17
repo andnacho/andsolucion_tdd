@@ -1,0 +1,54 @@
+
+// Variables
+@import 'variables';
+
+// // Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+#box{
+  width:200px;
+  height:200px;
+  background-color: blue;
+}
+
+
+#abajo{
+  margin-top: 400px;
+  width:200px;
+  height:200px;
+  background-color: red;
+}
+#contactanos{
+  margin-top: 400px;
+  width:200px;
+  height:200px;
+  background-color: gray;
+}
+#informacion{
+  margin-top: 600px;
+  width:200px;
+  height:200px;
+  background-color: orange;
+}
+#sobre_nosotros{
+  margin-top: 400px;
+  width:200px;
+  height:200px;
+  background-color:green;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
