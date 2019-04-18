@@ -11,19 +11,54 @@ class ProjectTest extends TestCase
 
     use WithFaker, RefreshDatabase;
 
+    /** @test */
+    public function guest_cannot_create_projects()
+    {
+
+       // $this->withoutExceptionHandling();
+
+        $attributes = factory('App\Project')->raw();
+
+        $this->post('/projects', $attributes)->assertRedirect('login');
+    }
+    
+    /** @test */
+    public function guests_cannot_view_projects()
+    {
+
+       // $this->withoutExceptionHandling();
+
+        
+
+        $this->get('/projects', $attributes)->assertRedirect('login');
+    }
+    
+    /** @test */
+    public function guests_cannot_view_a_single_projects()
+    {
+
+       $project = factory('App\Project')->create();     
+
+        $this->get('/projects', $attributes)->assertRedirect('login');
+    }
+    
     /**
      * A basic feature test example.
      *
      * @return void
      */
     /** @test */
-    public function a_user_can_create_a_project()
+    public function guess_create_a_project()
     {
 
+        $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\User')->create());
        
         $attributes = [
             'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph
+            'description' => $this->faker->paragraph,
+           
         ];
 
         $this->post('/projects', $attributes)->assertRedirect('/projects');
@@ -37,8 +72,7 @@ class ProjectTest extends TestCase
     /** @test */
     public function a_user_can_view_a_project()
     {
-        $this->withoutExceptionHandling();
-
+        
         $project = factory('App\Project')->create();
 
         $this->get($project->path())
@@ -49,6 +83,9 @@ class ProjectTest extends TestCase
     /** @test */
     public function a_project_require_a_title()
     {
+
+        $this->actingAs(factory('App\User')->create());
+
         $attributes = factory('App\Project')->raw(['title'=>'']);
       
         $this->post('/projects', $attributes)->assertSessionHasErrors('title');
@@ -57,8 +94,12 @@ class ProjectTest extends TestCase
     /** @test */
     public function a_project_require_a_description()
     {
+        $this->actingAs(factory('App\User')->create());
+        
         $attributes = factory('App\Project')->raw(['description'=>'']);
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');
     }
+
+    
 }
 
