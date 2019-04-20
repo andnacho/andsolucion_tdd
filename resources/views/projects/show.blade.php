@@ -5,7 +5,8 @@
 
    <div>{{ $project->description }}</div>
 
-   <a href="/projects" class="btn btn-secondary">Cancel</a>
+   <a href="/projects" class="btn btn-secondary">Go back</a>
 
 </body>
 @endsection
+
