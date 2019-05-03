@@ -1,5 +1,7 @@
 <?php
 
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+
 return [
 
     /*
@@ -161,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
         
         /*
         * Package Service Providers...
@@ -176,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         App\Providers\ProductModelServiceProvider::class,
+//        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*

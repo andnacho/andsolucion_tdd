@@ -4,11 +4,12 @@
 
    class Prueba
    {
-    private $foo; 
-    
-    
-    public function __construct(Foo $foo)
-    {
-    $this->foo = $foo;
-    }
+       private $foo;
+
+
+       public function __construct(Foo $foo)
+       {
+           $this->foo = $foo;
+       }
+
    }

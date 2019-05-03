@@ -4,20 +4,25 @@
 
 
 <div class="w-full max-w-sm justify-center mx-auto mt-6">
+  
+  
+  <h1 class="mb-4">Edit your project</h1>
+  
+  <form 
+      action="{{ $project->path() }}"
+      method="POST"
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
-      <p class="text-center text-grey text-xs">
-        
-          <h1 class="mb-4">Edit your project</h1>
+      @method('PATCH')
 
-          <form action="{{ $project->path() }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-             
-              @method('PATCH')
-          
-              @include('projects.form')
-
-          </form>
-        ©2019 Andsolucion
-      </p>
+      @include('projects.form',[
+        'buttonText' => 'Update Project'
+         ])
+    
+  </form>
+  <p class="text-center text-grey text-xs">
+    ©2019 Andsolucion
+  </p>
     </div>
     
 

@@ -57,19 +57,59 @@
                            placeholder="Here you can add some usefull notes"
                            >{{ $project->notes }}</textarea>
                            <button type="submit" class="button">Save</button>
+                         
                       </form>
+
                   </div>
                </div>
                <div class="lg:w-1/4 px-3">
                     <div class="px-3 pb-6 mt-6">
                         @include ('projects.card')
+
+
+                        <div class="card mt-3">
+
+
+                            <ul>
+                                @foreach ($project->activity as $activity)
+                                    <li>
+
+                                        @if ($activity->description === 'created')
+                                            New Project created
+                                        @elseif ($activity->description === 'created_task')
+                                            Task created
+                                        @elseif ($activity->description === 'completed_task')
+                                            Task completed
+                                        @else
+                                            {{$activity->description}}
+                                        @endif
+                                    </li>
+
+                                @endforeach
+                            </ul>
+
+                        </div>
+
+
                     </div>
                 </div>
          </div>
+
+    @if ($errors->any())
+        <div class="field mt-5 text-red">
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+
+        </div>
+    @endif
     
         </main>
     
        
-</body>
+
 @endsection
 
