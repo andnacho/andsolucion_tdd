@@ -1,0 +1,1 @@
+{{ $activity->user->name }} completed the task "{{ $activity->subject->body }}" a project

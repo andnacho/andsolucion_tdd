@@ -36,7 +36,7 @@
                   <div>
      
                       <!-- Right Side Of Navbar -->
-                      <ul class="navbar-nav ml-auto">
+                      <ul class="navbar-nav ml-auto list-reset">
                           <!-- Authentication Links -->
                           @guest
                               <li class="nav-item">
@@ -48,12 +48,12 @@
                                   </li>
                               @endif
                           @else
-                              <li class="nav-item dropdown">
-                                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                      {{ Auth::user()->name }} <span class="caret"></span>
-                                  </a>
+                              <li class="nav-item dropdown align-baseline">
+                                  <div id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                      <img src="https://gravatar.com/avatar/{{md5('andnachocas@gmail.com')}}?s=60" class="rounded-full"><span class="caret"></span>
+                                  </div>
 
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                       <a class="dropdown-item" href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                        document.getElementById('logout-form').submit();">

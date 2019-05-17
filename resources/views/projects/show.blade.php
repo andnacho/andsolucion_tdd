@@ -7,13 +7,28 @@
          <p class="text-grey text-sm font-normal">
              <a href="/projects" class="text-gray text-sm font-normal no-underline">My projects</a> / {{ $project->title }}
             </p>
-        <a href="{{ $project->path().'/edit' }}" class="button">Edit project</a>
+
+         <div class="flex items-center">
+
+                 <img
+                         src="{{ gravatar_url($project->owner->email) }}"
+                         alt="{{ $project->owner->name }}"
+                         class="rounded-full w-8 mr-2">
+
+             @foreach ($project->members as $member)
+                 <img
+                         src="{{ gravatar_url($member->email) }}"
+                         alt="{{ $member->name }}"
+                         class="rounded-full w-8 mr-2">
+             @endforeach
+
+                 <a href="{{ $project->path().'/edit' }}" class="button ml-4">Edit project</a>
+         </div>
      </div>
 </header>
 
 <main>
-    
-    
+
          <div class="lg:flex -mx-3">
               <div class="lg:w-3/4 px-3 mb-6">
                   <div class="mb-8">
@@ -66,31 +81,7 @@
                     <div class="px-3 pb-6 mt-6">
                         @include ('projects.card')
 
-
-                        <div class="card mt-3">
-
-
-                            <ul>
-                                @foreach ($project->activity as $activity)
-                                    <li>
-
-                                        @if ($activity->description === 'created')
-                                            New Project created
-                                        @elseif ($activity->description === 'created_task')
-                                            Task created
-                                        @elseif ($activity->description === 'completed_task')
-                                            Task completed
-                                        @else
-                                            {{$activity->description}}
-                                        @endif
-                                    </li>
-
-                                @endforeach
-                            </ul>
-
-                        </div>
-
-
+                        @include('projects.activity.card')
                     </div>
                 </div>
          </div>
@@ -108,8 +99,7 @@
     @endif
     
         </main>
-    
-       
+
 
 @endsection
 

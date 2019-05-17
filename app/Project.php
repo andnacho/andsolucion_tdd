@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+
+    use RecordsActivity;
+
      /**
      * @var array
      */
@@ -55,15 +58,14 @@ class Project extends Model
        return $this->hasMany(Activity::class);
     }
 
-    /**
-     * Record activity for a project
-     *
-     * @param $description
-     * @param $project
-     */
-    public function recordActivity($description)
+    public function invite(User $user)
     {
-        $this->activity()->create(compact('description'));
+        return $this->members()->attach($user);
+    }
+
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'project_members')->withTimestamps();
 
     }
 

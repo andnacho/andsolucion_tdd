@@ -1,0 +1,1 @@
+{{ $activity->user->name }} incompleted the task "{{ $activity->subject->body }}" a project

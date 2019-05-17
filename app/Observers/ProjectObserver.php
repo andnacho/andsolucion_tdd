@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Activity;
 use App\Project;
+use Facades\Tests\Setup\ProjectFactory;
 
 class ProjectObserver
 {

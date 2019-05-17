@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Project;
+use App\User;
 use Tests\TestCase;
 use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -16,7 +17,7 @@ class ManageProjectTest extends TestCase
     /** @test */
     public function manage()
     {
-      
+
         $project = factory('App\Project')->create();     
 
         $this->get('/projects')->assertRedirect('login');
@@ -93,6 +94,36 @@ class ManageProjectTest extends TestCase
     }
 
     /** @test */
+    public function unauthorized_cannot_delete_a_project()
+    {
+        $project = ProjectFactory::create();
+
+        $this->delete($project->path())
+            ->assertRedirect('/login');
+
+        $this->signIn();
+
+        $this->delete($project->path())
+            ->assertStatus(403);
+
+//        $this->assertDatabaseMissing('projects', $project->only('id'));
+    }
+
+    /** @test */
+    public function a_user_can_delete_a_project()
+    {
+        $this->withoutExceptionHandling();
+
+        $project = ProjectFactory::create();
+
+        $this->actingAs($project->owner)
+            ->delete($project->path())
+            ->assertRedirect('/projects');
+
+          $this->assertDatabaseMissing('projects', $project->only('id'));
+    }
+    
+    /** @test */
     public function a_user_can_view_their_project()
     {
         $project = ProjectFactory::create();
@@ -101,6 +132,22 @@ class ManageProjectTest extends TestCase
              ->assertSee($project->title)
              ->assertSee($project->description);
     }
+    
+    /** @test */
+    public function a_user_can_see_all_projects_they_have_been_invited_to_on_their_dashboard()
+    {
+        //given a user is signed in
+        $user = $this->signIn();
+        //when he is invited to a project that was no created by him
+        $project = tap(ProjectFactory::create())->invite($user);
+
+
+        //then he can see the project in the dashboard
+        $this->get('/projects')
+            ->assertSee($project->title);
+
+    }
+    
 
     /** @test */
     public function an_authenticated_user_cannot_view_others_projects()
