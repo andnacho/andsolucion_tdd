@@ -27,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         \Gate::define('update', 'App\Policies\ProjectsPolicy@update');
+        \Gate::define('manage', 'App\Policies\ProjectsPolicy@manage');
         //
     }
 }

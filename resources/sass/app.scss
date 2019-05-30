@@ -1,4 +1,3 @@
-
 // Variables
 @import 'variables';
 
@@ -19,111 +18,126 @@
  *
  * @import "tailwindcss/preflight";
  */
- @tailwind preflight;
+@tailwind preflight;
 
- /**
-  * This injects any component classes registered by plugins.
-  *
-  * If using `postcss-import`, use this import instead:
-  *
-  * @import "tailwindcss/components";
-  */
- @tailwind components;
- 
- /**
-  * Here you would add any of your custom component classes; stuff that you'd
-  * want loaded *before* the utilities so that the utilities could still
-  * override them.
-  *
-  * Example:
-  *
-  * .btn { ... }
-  * .form-input { ... }
-  *
-  * Or if using a preprocessor or `postcss-import`:
-  *
-  * @import "components/buttons";
-  * @import "components/forms";
-  */
+/**
+ * This injects any component classes registered by plugins.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/components";
+ */
+@tailwind components;
 
-  .section{
-    @apply .px-4;
-  }
+/**
+ * Here you would add any of your custom component classes; stuff that you'd
+ * want loaded *before* the utilities so that the utilities could still
+ * override them.
+ *
+ * Example:
+ *
+ * .btn { ... }
+ * .form-input { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "components/buttons";
+ * @import "components/forms";
+ */
 
-  .button{
-  
-    box-shadow: 0 2px 7px 0 #b0eaff;
-    @apply .bg-blue .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
-  }
+.section {
+  @apply .px-4;
+}
 
-  .card{
-    @apply bg-white p-5 rounded shadow
-  }
+.button {
+  box-shadow: 0 2px 7px 0 #b0eaff;
+  @apply .bg-button .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
+}
 
- 
- /**
-  * This injects all of Tailwind's utility classes, generated based on your
-  * config file.
-  *
-  * If using `postcss-import`, use this import instead:
-  *
-  * @import "tailwindcss/utilities";
-  */
- @tailwind utilities;
- 
- /**
-  * Here you would add any custom utilities you need that don't come out of the
-  * box with Tailwind.
-  *
-  * Example :
-  *
-  * .bg-pattern-graph-paper { ... }
-  * .skew-45 { ... }
-  *
-  * Or if using a preprocessor or `postcss-import`:
-  *
-  * @import "utilities/background-patterns";
-  * @import "utilities/skew-transforms";
-  */
+.card {
+  @apply .bg-card .p-5 .rounded .shadow;
+  color: var(--text-default-color)
+}
+
+.logo {
+  fill: var(--logo-default-color)
+}
 
 
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/utilities";
+ */
+@tailwind utilities;
 
-#box{
-  width:200px;
-  height:200px;
+/**
+ * Here you would add any custom utilities you need that don't come out of the
+ * box with Tailwind.
+ *
+ * Example :
+ *
+ * .bg-pattern-graph-paper { ... }
+ * .skew-45 { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "utilities/background-patterns";
+ * @import "utilities/skew-transforms";
+ */
+
+
+#box {
+  width: 200px;
+  height: 200px;
   background-color: blue;
 }
 
 
-#abajo{
+#abajo {
   margin-top: 400px;
-  width:200px;
-  height:200px;
+  width: 200px;
+  height: 200px;
   background-color: red;
 }
-#contactanos{
+
+#contactanos {
   margin-top: 400px;
-  width:200px;
-  height:200px;
+  width: 200px;
+  height: 200px;
   background-color: gray;
 }
-#informacion{
+
+#informacion {
   margin-top: 600px;
-  width:200px;
-  height:200px;
+  width: 200px;
+  height: 200px;
   background-color: orange;
 }
-#sobre_nosotros{
+
+#sobre_nosotros {
   margin-top: 400px;
-  width:200px;
-  height:200px;
-  background-color:green;
+  width: 200px;
+  height: 200px;
+  background-color: green;
 }
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+{
   opacity: 0;
 }
 
+//Themes
+@import 'themes/light';
+@import 'themes/dark';
+@import 'themes/ocean';
+
+//Components
+@import 'components/button';

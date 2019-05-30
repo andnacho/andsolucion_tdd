@@ -18,63 +18,65 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
 </head>
-<body class="bg-grey-lighter">
-    <div id="app">
-        <nav class="bg-white">
-            <div class="container mx-auto">
-                <div class="flex justify-between items-center py-2">
+<body class="theme-light bg-page">
+<div id="app">
+    <nav class="bg-header">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center py-2">
 
-                  <h1>
-                      <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="/images/dibujo.svg" alt="logo">
-                      </a>
-                  </h1>
+                <h1>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        @include('logo.logo')
+                    </a>
+                </h1>
 
-                  
-                  <div>
-     
-                      <!-- Right Side Of Navbar -->
-                      <ul class="navbar-nav ml-auto list-reset">
-                          <!-- Authentication Links -->
-                          @guest
-                              <li class="nav-item">
-                                  <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                              </li>
-                              @if (Route::has('register'))
-                                  <li class="nav-item">
-                                      <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                  </li>
-                              @endif
-                          @else
-                              <li class="nav-item dropdown align-baseline">
-                                  <div id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
-                                      <img src="https://gravatar.com/avatar/{{md5('andnachocas@gmail.com')}}?s=60" class="rounded-full"><span class="caret"></span>
-                                  </div>
 
-                                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                      <a class="dropdown-item" href="{{ route('logout') }}"
-                                         onclick="event.preventDefault();
+                <div>
+
+                    <!-- Right Side Of Navbar -->
+                    <div class="flex items-center ml-auto list-reset">
+                        <!-- Authentication Links -->
+                        @guest
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            @if (Route::has('register'))
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            @endif
+                        @else
+
+                            <theme-switcher></theme-switcher>
+
+                            <div class="flex">
+                                <div id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                     aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <img src="https://gravatar.com/avatar/{{md5('andnachocas@gmail.com')}}?s=60"
+                                         class="rounded-full"><span class="caret"></span>
+                                </div>
+
+                                <div class="dropdown-menu flex ml-5" aria-labelledby="navbarDropdown">
+                                    <a class="no-underline ml-1 my-auto text-default flex-1" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                        document.getElementById('logout-form').submit();">
-                                          {{ __('Logout') }}
-                                      </a>
+                                        {{ucfirst(auth()->user()->name)}}
+                                    </a>
 
-                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                          @csrf
-                                      </form>
-                                  </div>
-                              </li>
-                          @endguest
-                      </ul>
-                  </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        @endguest
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="container mx-auto py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="container mx-auto py-4">
+        @yield('content')
+    </main>
+</div>
 </body>
 </html>
