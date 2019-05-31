@@ -50,6 +50,7 @@ let colors = {
   'logo': 'var(--logo-default-color)',
   'task': 'var(--task-default-color)',
   'accent': '#81d6ec',
+  'error': 'var(--text-error-color)',
 
   'black': '#22292f',
   'grey-darkest': '#3d4852',

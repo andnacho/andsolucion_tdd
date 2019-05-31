@@ -3,22 +3,20 @@
   color: white;
 
 
-    &.is-outlined {
-     @apply .bg-card .border .border-accent .text-accent;
-   }
+  &.is-outlined {
+    @apply .bg-card .border .border-accent .text-accent;
+  }
 
   .theme-light & {
     -webkit-box-shadow: 0 2px 7px 0 #b0eaff;
     -moz-box-shadow: 0 2px 7px 0 #b0eaff;
     box-shadow: 0 2px 7px 0 #b0eaff;
-    fill: #484747;
   }
 
   .theme-dark & {
     -webkit-box-shadow: 0 2px 7px 0 #00658b;
     -moz-box-shadow: 0 2px 7px 0 #00658b;
     box-shadow: 0 2px 7px 0 #00658b;
-    fill: white;
   }
 
 
@@ -26,7 +24,6 @@
     -webkit-box-shadow: 0 2px 7px 0 #1db4b4;
     -moz-box-shadow: 0 2px 7px 0 #1db4b4;
     box-shadow: 0 2px 7px 0 #1db4b4;
-    fill: #9bffbe;
   }
 
 

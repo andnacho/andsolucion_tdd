@@ -14,6 +14,8 @@
             </form>
         </footer>
     @else
-        Invited
+        <span class="text-blue">
+            Invited
+        </span>
     @endcan
 </div>

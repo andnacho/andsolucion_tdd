@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,26 +47,39 @@
 
                             <theme-switcher></theme-switcher>
 
-                            <div class="flex">
-                                <div id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                     aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="https://gravatar.com/avatar/{{md5('andnachocas@gmail.com')}}?s=60"
-                                         class="rounded-full"><span class="caret"></span>
-                                </div>
+                            <dropdown align="right" width="200px">
+                                <template v-slot:trigger>
+                                    <button class="flex">
+                                        <div id="" class="nav-link" href="#" role="button">
+                                            <img src="https://gravatar.com/avatar/{{md5('andnachocas@gmail.com')}}?s=60"
+                                                 class="rounded-full"><span class="caret"></span>
+                                        </div>
 
-                                <div class="dropdown-menu flex ml-5" aria-labelledby="navbarDropdown">
-                                    <a class="no-underline ml-1 my-auto text-default flex-1" href="{{ route('logout') }}"
+                                        <div class="flex ml-5 mr-8 h-16">
+                                            <div class="no-underline ml-1 my-auto text-default">
+                                                {{ucfirst(auth()->user()->name)}}
+                                            </div>
+
+                                        </div>
+                                    </button>
+
+                                </template> 
+
+                                <template v-slot:default>
+                                    <a class="dropdown-menu-link"
+                                       href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                       document.getElementById('logout-form').submit();">
-                                        {{ucfirst(auth()->user()->name)}}
-                                    </a>
+                                                       document.getElementById('logout-form').submit();">Logout</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                           style="display: none;">
                                         @csrf
                                     </form>
-                                </div>
-                            </div>
+
+                                </template>
+
+                            </dropdown>
+
                         @endguest
                     </div>
                 </div>

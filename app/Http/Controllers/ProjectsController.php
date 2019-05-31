@@ -7,16 +7,16 @@ use App\Project;
 use Illuminate\Http\Request;
 
 
-
 class ProjectsController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
 
         $projects = auth()->user()->accesibleProjects();
 
         return view('projects.index', compact('projects'));
-        
+
     }
 
 
@@ -25,7 +25,7 @@ class ProjectsController extends Controller
 //        $this->authorize('update', $project);
 
 
-        if(\Gate::denies('update', $project)){
+        if (\Gate::denies('update', $project)) {
             abort(403);
         }
 
@@ -41,37 +41,45 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-    return view('projects.create');
+        return view('projects.create');
     }
 
 
     /**
      * @param UpdateProjectRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return mixed
      */
-    public function store(UpdateProjectRequest $request){
+    public function store(UpdateProjectRequest $request)
+    {
 
 
-    $project = auth()->user()->projects()->create($request->validated());
-        
-    //redirect
-    return redirect($project->path());
+        $project = auth()->user()->projects()->create($request->validated());
+
+        if ($tasks = request('tasks')) {
+            $project->addTasks($tasks);
+        }
+
+        if (request()->wantsJson()) {
+            return ['message' => $project->path()];
+        }
+
+        //redirect
+        return redirect($project->path());
 
     }
-
 
 
     /**
      * edit
      *
-     * @param  Project $project
+     * @param Project $project
      *
      * @return void
      */
     public function edit(Project $project)
     {
-        
-    return view('projects.edit', compact('project'));
+
+        return view('projects.edit', compact('project'));
     }
 
 
@@ -92,7 +100,7 @@ class ProjectsController extends Controller
 
         return redirect($project->path());
     }
-    
+
     public function destroy(Project $project)
     {
         $this->authorize('manage', $project);
@@ -102,18 +110,18 @@ class ProjectsController extends Controller
     }
 
     /**
-     * 
+     *
      *
      * @return array
      */
     protected function validador()
-    {   
+    {
         return request()->validate([
-            'title' => 'sometimes|required',
+            'title'       => 'sometimes|required',
             'description' => 'sometimes|required',
-            'notes' => 'nullable'
+            'notes'       => 'nullable'
         ]);
     }
 
-   
+
 }
